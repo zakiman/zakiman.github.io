@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>event-loop | Hexo</title><meta name="description"><meta name="generator" content="Hexo"><meta name="author" content="Shen Haojie"><meta name="keywords" content="sjaak van den berg, svdb, bitcoin, crypto, payment, integration, bitcoins, wordpress, betaling, webshop, front end, design, ontwerp, developer"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="160x160" href="/images/favicon-160x160.png"><link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192x192.png"><meta name="msapplication-TileColor" content="#121315"><meta name="msapplication-TileImage" content="/images/mstile-144x144.png"><link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><a href="/"><img src="/images/svdb.png" alt="Hexo" title="Hexo"></a><h1><a href="/" alt="Hexo" title="Hexo" itemprop="headline">Hexo</a></h1><p itemprop="description"></p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/" alt="Home" title="Home" itemprop="url">Home</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline">event-loop</h1><span class="post-meta">Published on<time itemprop="datePublished" datetime="2020-10-13T15:23:54.940Z"> 星期二, 十月 13日 2020 at 23:23</time><br>Last updated on<time itemprop="dateModified" datetime="2020-10-13T15:23:54.940Z"> 星期二, 十月 13日 2020 at 23:28</time></span><p><strong>Event Loop</strong> 是一个很重要的概念，指的是计算机系统的一种<strong>运行机制</strong>。</p>
+<p><strong>浏览器</strong> 或 <strong>Node</strong> 对于 <strong>javascript</strong> 语言就采用这种机制，来解决<strong>单线程运行</strong>带来的一些问题。</p>
+<p>the event loop is a programming construct or design pattern that waits for and dispatches events or messages in a program.<a href="https://en.wikipedia.org/wiki/Event_loop" target="_blank" rel="noopener">参考维基</a></p>
+<h2 id="堆，栈、队列"><a href="#堆，栈、队列" class="headerlink" title="堆，栈、队列"></a>堆，栈、队列</h2><h3 id="堆（Heap）"><a href="#堆（Heap）" class="headerlink" title="堆（Heap）"></a>堆（Heap）</h3><p>堆是一种数据结构，是利用完全二叉树维护的一组数据，堆分为两种，一种为最大堆，一种为最小堆，将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。</p>
+<p>堆是线性数据结构，相当于一维数组，有唯一后继。</p>
+<h3 id="栈（Stack）"><a href="#栈（Stack）" class="headerlink" title="栈（Stack）"></a>栈（Stack）</h3><p>栈在计算机科学中是限定仅在表尾进行插入或删除操作的线性表。栈是一种数据结构，它按照<strong>后进先出</strong>的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据。</p>
+<p>栈是只能在某一端插入和删除的特殊线性表。</p>
+<h3 id="队列（Queue）"><a href="#队列（Queue）" class="headerlink" title="队列（Queue）"></a>队列（Queue）</h3><p>特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。</p>
+<p>进行插入操作的端称为队尾，进行删除操作的端称为队头。 队列中没有元素时，称为空队列。</p>
+<p>队列的数据元素又称为队列元素。在队列中插入一个队列元素称为入队，从队列中删除一个队列元素称为出队。因为队列只允许在一端插入，在另一端删除，所以只有最早进入队列的元素才能最先从队列中删除，故队列又称为<strong>先进先出</strong>（FIFO—first in first out）</p>
+<h2 id="任务（Task）"><a href="#任务（Task）" class="headerlink" title="任务（Task）"></a>任务（Task）</h2><p>在 JavaScript 中，任务被分为两种，一种宏任务（MacroTask）也叫 Task，一种叫微任务（MicroTask）。</p>
+<p><img src="/img/event_loop/queue.png" alt="avatar"></p>
+<h3 id="MacroTask（宏任务）"><a href="#MacroTask（宏任务）" class="headerlink" title="MacroTask（宏任务）"></a>MacroTask（宏任务）</h3><ul>
+<li>script 全部代码</li>
+<li>setTimeout、setInterval、setImmediate（浏览器暂时不支持，只有 IE10 支持，具体可见 MDN）</li>
+<li>I/O</li>
+<li>UI Rendering</li>
+</ul>
+<h3 id="MicroTask（微任务）"><a href="#MicroTask（微任务）" class="headerlink" title="MicroTask（微任务）"></a>MicroTask（微任务）</h3><ul>
+<li>Process.nextTick（Node 独有）</li>
+<li>Promise</li>
+<li>Object.observe(废弃)</li>
+<li>MutationObserver</li>
+</ul>
+<h3 id="事件循环的进程模型"><a href="#事件循环的进程模型" class="headerlink" title="事件循环的进程模型"></a>事件循环的进程模型</h3><p>执行栈在执行完同步任务后，查看执行栈是否为空，如果执行栈为空，就会去执行 Task（宏任务），每次宏任务执行完毕后，检查微任务(microTask)队列是否为空，如果不为空的话，会按照先入先出的规则全部执行完微任务(microTask)后，设置微任务(microTask)队列为 null，然后再执行宏任务，如此循环。</p>
+<ul>
+<li>选择当前要执行的任务队列，选择任务队列中最先进入的任务，如果任务队列为空即 null，则执行跳转到微任务（MicroTask）的执行步骤。</li>
+<li>将事件循环中的任务设置为已选择任务。</li>
+<li>执行任务。</li>
+<li>将事件循环中当前运行任务设置为 null。</li>
+<li>将已经运行完成的任务从任务队列中删除。</li>
+<li>microtasks 步骤：进入 microtask 检查点。</li>
+<li>更新界面渲染。</li>
+<li>返回第一步</li>
+</ul>
+<p>执行进入 microtask 检查点时，用户代理会执行以下步骤：</p>
+<ul>
+<li>设置 microtask 检查点标志为 true。</li>
+<li>当事件循环 microtask 执行不为空时：选择一个最先进入的 microtask 队列的 microtask，将事件循环的 microtask 设置为已选择的 microtask，运行 microtask，将已经执行完成的 microtask 为 null，移出 microtask 中的 microtask。</li>
+<li>清理 IndexDB 事务</li>
+<li>设置进入 microtask 检查点的标志为 false。</li>
+</ul>
+</article></main></body></html>
